@@ -397,6 +397,13 @@ namespace pointed
   definition eq_of_phomotopy (p : f ~* g) : f = g :=
   to_inv (pmap_eq_equiv f g) p
 
+  definition phomotopy_of_homotopy {X Y : Type*} {f g : X →* Y} (h : f ~ g) [is_set Y] : f ~* g :=
+  begin
+    fapply phomotopy.mk,
+    { exact h },
+    { apply is_set.elim }
+  end
+
   -- TODO: flip arguments in s
   definition pmap_eq (r : Πa, f a = g a) (s : respect_pt f = (r pt) ⬝ respect_pt g) : f = g :=
   eq_of_phomotopy (phomotopy.mk r s⁻¹)

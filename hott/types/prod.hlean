@@ -125,6 +125,19 @@ namespace prod
     apply idpo
   end
 
+  open prod.ops
+  definition prod_pathover_equiv {A : Type} {B C : A → Type} {a a' : A} (p : a = a')
+    (x : B a × C a) (x' : B a' × C a') : x =[p] x' ≃ x.1 =[p] x'.1 × x.2 =[p] x'.2 :=
+  begin
+    fapply equiv.MK,
+    { intro q, induction q, constructor: constructor },
+    { intro v, induction v with q r, exact prod_pathover _ _ _ q r },
+    { intro v, induction v with q r, induction x with b c, induction x' with b' c',
+      esimp at *, induction q, refine idp_rec_on r _, reflexivity },
+    { intro q, induction q, induction x with b c, reflexivity }
+  end
+
+
   /-
     TODO:
     * define the projections from the type u =[p] v
@@ -301,6 +314,8 @@ namespace prod
   definition ptprod [constructor] {n : ℕ₋₂} (A B : n-Type*) : n-Type* :=
   ptrunctype.mk' n (A × B)
 
+  definition pprod_functor [constructor] {A B C D : Type*} (f : A →* C) (g : B →* D) : A ×* B →* C ×* D :=
+  pmap.mk (prod_functor f g) (prod_eq (respect_pt f) (respect_pt g))
 
 
 end prod

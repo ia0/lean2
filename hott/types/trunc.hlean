@@ -728,16 +728,17 @@ namespace trunc
     loop_ptrunc_pequiv n A (p ⬝ q) =
       tconcat (loop_ptrunc_pequiv n A p) (loop_ptrunc_pequiv n A q) :=
   encode_con p q
-
+print succ_add_nat
   definition loopn_ptrunc_pequiv (n : ℕ₋₂) (k : ℕ) (A : Type*) :
     Ω[k] (ptrunc (n+k) A) ≃* ptrunc n (Ω[k] A) :=
   begin
     revert n, induction k with k IH: intro n,
     { reflexivity},
     { refine _ ⬝e* loop_ptrunc_pequiv n (Ω[k] A),
-      rewrite [loopn_succ_eq], apply loop_pequiv_loop,
+      change Ω (Ω[k] (ptrunc (n + succ k) A)) ≃* Ω (ptrunc (n + 1) (Ω[k] A)),
+      apply loop_pequiv_loop,
       refine _ ⬝e* IH (n.+1),
-      rewrite succ_add_nat}
+      exact loopn_pequiv_loopn k (pequiv_of_eq (ap (λn, ptrunc n A) !succ_add_nat⁻¹)) }
   end
 
   definition loopn_ptrunc_pequiv_con {n : ℕ₋₂} {k : ℕ} {A : Type*}

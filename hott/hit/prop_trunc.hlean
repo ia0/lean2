@@ -409,7 +409,7 @@ open prop_trunc trunc
 -- Corollaries for the actual truncation.
 namespace is_trunc
   local attribute is_prop_trunc_one_step_tr [instance]
-  definition is_prop.elim_set {A : Type} {P : Type} [is_set P] (f : A → P)
+  definition prop_trunc.elim_set [unfold 6] {A : Type} {P : Type} [is_set P] (f : A → P)
     (p : Πa a', f a = f a') (x : trunc -1 A) : P :=
   begin
     have y : trunc 0 (one_step_tr A),
@@ -420,8 +420,8 @@ namespace is_trunc
     { exact p a a'}
   end
 
-  definition is_prop.elim_set_tr {A : Type} {P : Type} {H : is_set P} (f : A → P)
-    (p : Πa a', f a = f a') (a : A) : is_prop.elim_set f p (tr a) = f a :=
+  definition prop_trunc.elim_set_tr {A : Type} {P : Type} {H : is_set P} (f : A → P)
+    (p : Πa a', f a = f a') (a : A) : prop_trunc.elim_set f p (tr a) = f a :=
   by reflexivity
 
 end is_trunc

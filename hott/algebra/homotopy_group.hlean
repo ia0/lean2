@@ -124,6 +124,13 @@ namespace eq
     { exact homotopy_group_succ_in_con},
   end
 
+  definition is_contr_homotopy_group_of_is_contr (A : Type*) (n : ℕ) [is_contr A] : is_contr (π[n] A) :=
+  begin
+    apply is_trunc_trunc_of_is_trunc,
+    apply is_contr_loop_of_is_trunc,
+    apply is_trunc_of_is_contr
+  end
+
   definition homotopy_group_functor [constructor] (n : ℕ) {A B : Type*} (f : A →* B)
     : π[n] A →* π[n] B :=
   ptrunc_functor 0 (apn n f)

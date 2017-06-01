@@ -18,10 +18,6 @@ namespace group
   definition Group.struct' [instance] [reducible] (G : Group) : group G :=
   Group.struct G
 
-  definition ab_group_Group_of_AbGroup [instance] [constructor] [priority 900]
-    (G : AbGroup) : ab_group (Group_of_AbGroup G) :=
-  begin esimp, exact _ end
-
   definition ab_group_pSet_of_Group [instance] (G : AbGroup) : ab_group (pSet_of_Group G) :=
   AbGroup.struct G
 

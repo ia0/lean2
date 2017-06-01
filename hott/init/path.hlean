@@ -67,11 +67,11 @@ namespace eq
     p₁ ⬝ (p₂ ⬝ p₃ ⬝ p₄) ⬝ p₅ = (p₁ ⬝ p₂) ⬝ p₃ ⬝ (p₄ ⬝ p₅) :=
   by induction p₅; induction p₄; induction p₃; reflexivity
 
-  -- The left inverse law.
+  -- The right inverse law.
   definition con.right_inv [unfold 4] (p : x = y) : p ⬝ p⁻¹ = idp :=
   by induction p; reflexivity
 
-  -- The right inverse law.
+  -- The left inverse law.
   definition con.left_inv [unfold 4] (p : x = y) : p⁻¹ ⬝ p = idp :=
   by induction p; reflexivity
 
